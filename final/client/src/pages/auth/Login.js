@@ -7,8 +7,8 @@ import { useNavigate, useLocation } from "react-router-dom";
 
 export default function Login() {
   // state
-  const [email, setEmail] = useState("ryan@gmail.com");
-  const [password, setPassword] = useState("rrrrrr");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   // hook
   const [auth, setAuth] = useAuth();
   const navigate = useNavigate();
@@ -29,7 +29,7 @@ export default function Login() {
       } else {
         localStorage.setItem("auth", JSON.stringify(data));
         setAuth({ ...auth, token: data.token, user: data.user });
-        toast.success("Login successful");
+        toast.success("Inicio de sesión exitoso");
         navigate(
           location.state ||
             `/dashboard/${data?.user?.role === 1 ? "admin" : "user"}`
@@ -55,6 +55,8 @@ export default function Login() {
                 placeholder="Ingrese correo electrónico"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                autoFocus
+                required
               />
 
               <input
@@ -63,6 +65,7 @@ export default function Login() {
                 placeholder="Ingrese contraseña"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                required
               />
 
               <button className="btn btn-primary" type="submit">

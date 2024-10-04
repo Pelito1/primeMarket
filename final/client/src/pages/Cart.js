@@ -30,7 +30,7 @@ export default function Cart() {
           <div className="col-md-12">
             <div className="p-3 mt-2 mb-2 h4 bg-light text-center">
               {cart?.length ? (
-                "My Cart"
+                "Mi Carrito"
               ) : (
                 <div className="text-center">
                   <button

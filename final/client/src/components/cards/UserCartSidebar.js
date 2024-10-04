@@ -66,8 +66,8 @@ export default function UserCartSidebar() {
 
   return (
     <div className="col-md-4 mb-5">
-      <h4>Your cart summary</h4>
-      Total / Address / Payments
+      <h4>Resumen de tu carrito</h4>
+      Total / Dirección / Método de pago
       <hr />
       <h6>Total: {cartTotal()}</h6>
       {auth?.user?.address ? (
@@ -102,7 +102,7 @@ export default function UserCartSidebar() {
                 })
               }
             >
-              Login to checkout
+              Iniciar sesión para checkout
             </button>
           )}
         </div>

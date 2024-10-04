@@ -7,9 +7,14 @@ import { useNavigate } from "react-router-dom";
 
 export default function Register() {
   // state
-  const [name, setName] = useState("Ryan");
-  const [email, setEmail] = useState("ryan@gmail.com");
-  const [password, setPassword] = useState("rrrrrr");
+  const [names, setName] = useState("");
+  const [lastNames,setLastName] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [address, setAddress] = useState("");
+  const [status, setStatus] = useState("0");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
   // hooks
   const [auth, setAuth] = useAuth();
   const navigate = useNavigate();
@@ -18,7 +23,11 @@ export default function Register() {
     e.preventDefault();
     try {
       const { data } = await axios.post(`/register`, {
-        name,
+        names,
+        lastNames,
+        phoneNumber,
+        address,
+        status,
         email,
         password,
       });
@@ -28,15 +37,16 @@ export default function Register() {
       } else {
         localStorage.setItem("auth", JSON.stringify(data));
         setAuth({ ...auth, token: data.token, user: data.user });
-        toast.success("Registration successful");
+        toast.success("Registro exitoso");
         navigate("/dashboard/user");
       }
     } catch (err) {
       console.log(err);
-      toast.error("Registration failed. Try again.");
+      toast.error("Registro fallido. Intente nuevamente.");
     }
   };
 
+  console.log(process.env.REACT_APP_API);
   return (
     <div>
       <Jumbotron title="PrimeMarket" subTitle="Registro de Usuario" />
@@ -47,8 +57,8 @@ export default function Register() {
               <input
                 type="text"
                 className="form-control mb-4 p-2"
-                placeholder="Ingrese nombre"
-                value={name}
+                placeholder="Ingrese nombres"
+                value={names}
                 onChange={(e) => setName(e.target.value)}
                 autoFocus
                 required
@@ -57,11 +67,41 @@ export default function Register() {
               <input
                 type="text"
                 className="form-control mb-4 p-2"
-                placeholder="Ingrese apellido"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
+                placeholder="Ingrese apellidos"
+                value={lastNames}
+                onChange={(e) => setLastName(e.target.value)}
                 required
               />
+
+              <input
+                type="text"
+                className="form-control mb-4 p-2"
+                placeholder="Ingrese teléfono"
+                value={phoneNumber}
+                onChange={(e) => setPhoneNumber(e.target.value)}
+                required
+              />
+
+              <input
+                type="text"
+                className="form-control mb-4 p-2"
+                placeholder="Ingrese dirección"
+                value={address}
+                onChange={(e) => setAddress(e.target.value)}
+                required
+              />
+
+            {/* 
+             <input
+                type="text"
+                className="form-control mb-4 p-2"
+                placeholder="Ingrese status"
+                value={status}
+                onChange={(e) => setStatus(e.target.value)}
+                required
+              />
+              */
+            }
 
               <input
                 type="email"
@@ -88,7 +128,6 @@ export default function Register() {
           </div>
         </div>
       </div>
-      <pre>{JSON.stringify(name, null, 4)}</pre>
     </div>
   );
 }

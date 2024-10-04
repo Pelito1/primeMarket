@@ -59,7 +59,7 @@ export default function ProductCardHorizontal({ p, remove = true }) {
               className="text-danger mb-2 pointer"
               onClick={() => removeFromCart(p._id)}
             >
-              Remove
+              Eliminar
             </p>
           )}
         </div>

@@ -121,7 +121,7 @@ export default function ProductView() {
               }}
               onClick={() => {
                 setCart([...cart, product]);
-                toast.success("Added to cart");
+                toast.success("Añadido al carrito");
               }}
             >
               Agregar a Carrito
